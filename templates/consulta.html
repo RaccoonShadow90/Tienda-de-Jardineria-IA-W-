@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block titulo %}Consultar{% endblock %}
+{% block contenido %}
+<h1>Consultar productos</h1>
+<p>Elige un único criterio e introduce el valor que quieres buscar.</p>
+<form method="get" action="{{ url_for('consulta') }}">
+    <label for="criterio">Criterio</label>
+    <select id="criterio" name="criterio">
+        <option value="nombre" {% if criterio == 'nombre' %}selected{% endif %}>Nombre</option>
+        <option value="categoria" {% if criterio == 'categoria' %}selected{% endif %}>Categoría</option>
+        <option value="precio" {% if criterio == 'precio' %}selected{% endif %}>Precio máximo</option>
+    </select>
+    <label for="valor">Valor de búsqueda</label>
+    <input id="valor" name="valor" value="{{ valor }}" required aria-describedby="ayuda-consulta">
+    <div id="ayuda-consulta" class="ayuda">
+        <p>Nombre: escribe todo el nombre o una parte. Ejemplo: semillas.</p>
+        <p>Categoría: escribe una de estas categorías: {{ categorias|join(', ') }}.</p>
+        <p>Precio máximo: escribe un número, por ejemplo 10 o 6,50. Se incluyen los productos con ese precio o uno inferior.</p>
+    </div>
+    <button type="submit">Buscar</button>
+</form>
+{% if error %}
+    <p class="error" role="alert">{{ error }}</p>
+{% elif consultado %}
+    <h2>Resultados: {{ productos|length }}</h2>
+    {% if productos %}
+        {% include 'tabla_productos.html' %}
+    {% else %}
+        <p class="aviso">No se han encontrado productos con ese criterio.</p>
+    {% endif %}
+{% endif %}
+{% endblock %}

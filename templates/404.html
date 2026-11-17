@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block titulo %}Página no encontrada{% endblock %}
+{% block contenido %}
+<h1>Página no encontrada</h1>
+<p>El producto o la dirección que has solicitado no existe.</p>
+<a class="boton" href="{{ url_for('listado') }}">Volver al catálogo</a>
+{% endblock %}

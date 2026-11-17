@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ producto.nombre }}{% endblock %}
+{% block contenido %}
+<article class="tarjeta detalle">
+    <p class="etiqueta">{{ producto.categoria }}</p>
+    <h1>{{ producto.nombre }}</h1>
+    <p>{{ producto.descripcion }}</p>
+    <dl>
+        <dt>Identificador</dt><dd>{{ producto.id }}</dd>
+        <dt>Categoría</dt><dd>{{ producto.categoria }}</dd>
+        <dt>Precio</dt><dd>{{ '%.2f'|format(producto.precio) }} €</dd>
+        <dt>Stock</dt><dd>{{ producto.stock }} unidades</dd>
+        <dt>Disponibilidad</dt>
+        <dd>{% if producto.stock == 0 %}Agotado{% elif producto.stock <= 5 %}Quedan pocas unidades{% else %}En stock{% endif %}</dd>
+    </dl>
+</article>
+<a href="{{ url_for('listado') }}">Volver al catálogo</a>
+{% endblock %}

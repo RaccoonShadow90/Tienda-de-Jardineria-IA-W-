@@ -1,0 +1,18 @@
+<div class="tabla-contenedor">
+    <table>
+        <thead>
+            <tr><th scope="col">Producto</th><th scope="col">Categoría</th><th scope="col">Precio</th><th scope="col">Stock</th><th scope="col">Información</th></tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.categoria }}</td>
+                <td>{{ '%.2f'|format(producto.precio) }} €</td>
+                <td>{% if producto.stock == 0 %}<span class="agotado">Agotado</span>{% else %}{{ producto.stock }} unidades{% endif %}</td>
+                <td><a href="{{ url_for('detalle', identificador=producto.id) }}">Ver detalle<span class="solo-lectores"> de {{ producto.nombre }}</span></a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

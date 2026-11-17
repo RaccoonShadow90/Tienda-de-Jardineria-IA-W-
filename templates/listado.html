@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block titulo %}Productos{% endblock %}
+{% block contenido %}
+<h1>Catálogo de productos</h1>
+<p>{{ productos|length }} productos disponibles en el catálogo.</p>
+{% if productos %}
+    {% include 'tabla_productos.html' %}
+{% else %}
+    <p class="aviso">Todavía no hay productos en el catálogo.</p>
+{% endif %}
+<a class="boton" href="{{ url_for('anadir') }}">Añadir producto</a>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block titulo %}Inicio{% endblock %}
+{% block contenido %}
+<section class="presentacion">
+    <p class="etiqueta">TIENDA DE JARDINERÍA</p>
+    <h1>Un jardín empieza con algo pequeño</h1>
+    <p>Bienvenido a Jardín Verde. Esta aplicación permite consultar y gestionar el catálogo de una tienda de jardinería.</p>
+    <p>Actualmente tenemos <strong>{{ total }} productos diferentes</strong> en el catálogo.</p>
+    <a class="boton" href="{{ url_for('listado') }}">Ver productos</a>
+</section>
+<div class="tarjetas">
+    <section class="tarjeta">
+        <h2>Encuentra un producto</h2>
+        <p>Busca por nombre, categoría o precio máximo.</p>
+        <a href="{{ url_for('consulta') }}">Consultar catálogo</a>
+    </section>
+    <section class="tarjeta">
+        <h2>Amplía el catálogo</h2>
+        <p>Introduce los datos de un nuevo producto.</p>
+        <a href="{{ url_for('anadir') }}">Añadir producto</a>
+    </section>
+    <section class="tarjeta">
+        <h2>Revisa la tienda</h2>
+        <p>Consulta las estadísticas y los productos que necesitan reposición.</p>
+        <a href="{{ url_for('resumen') }}">Ver resumen</a>
+        <a href="{{ url_for('reposicion') }}">Ver reposición</a>
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block titulo %}Reposición{% endblock %}
+{% block contenido %}
+<h1>Productos para reponer</h1>
+<p>Esta selección muestra los productos con cinco unidades o menos, incluidos los agotados. Aparecen primero los que tienen menos stock.</p>
+{% if productos %}
+    <p>Hay {{ productos|length }} productos que necesitan reposición.</p>
+    {% include 'tabla_productos.html' %}
+{% else %}
+    <p class="aviso">Todos los productos tienen más de cinco unidades. No es necesario reponer.</p>
+{% endif %}
+{% endblock %}

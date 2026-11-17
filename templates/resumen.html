@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block titulo %}Resumen{% endblock %}
+{% block contenido %}
+<h1>Resumen de la tienda</h1>
+<p>Estos resultados se calculan cada vez que visitas esta página.</p>
+<div class="tarjetas">
+    <section class="tarjeta"><h2>Productos diferentes</h2><p class="cifra">{{ resumen.total }}</p></section>
+    <section class="tarjeta"><h2>Precio medio</h2><p class="cifra">{{ '%.2f'|format(resumen.precio_medio) }} €</p></section>
+    <section class="tarjeta"><h2>Unidades en stock</h2><p class="cifra">{{ resumen.unidades }}</p></section>
+    <section class="tarjeta"><h2>Valor del inventario</h2><p class="cifra">{{ '%.2f'|format(resumen.valor_inventario) }} €</p></section>
+</div>
+<h2>Productos por categoría</h2>
+<ul class="categorias">
+    {% for categoria, cantidad in resumen.por_categoria.items() %}
+    <li>{{ categoria }}: <strong>{{ cantidad }}</strong></li>
+    {% endfor %}
+</ul>
+<p>El precio medio corresponde a los productos diferentes, sin ponderar por stock. El valor del inventario es la suma del precio de cada producto multiplicado por sus unidades.</p>
+{% endblock %}

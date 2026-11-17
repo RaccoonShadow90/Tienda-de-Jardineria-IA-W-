@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block titulo %}Añadir producto{% endblock %}
+{% block contenido %}
+<h1>Añadir un producto</h1>
+<p>Todos los campos son obligatorios. El identificador se asigna automáticamente.</p>
+{% if errores %}
+<div class="error" role="alert">
+    <h2>Revisa los siguientes datos</h2>
+    <ul>{% for error in errores %}<li>{{ error }}</li>{% endfor %}</ul>
+</div>
+{% endif %}
+<form method="post" action="{{ url_for('anadir') }}">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre" value="{{ valores.get('nombre', '') }}" required>
+    <label for="categoria">Categoría</label>
+    <select id="categoria" name="categoria" required>
+        <option value="">Selecciona una categoría</option>
+        {% for categoria in categorias %}
+        <option value="{{ categoria }}" {% if valores.get('categoria') == categoria %}selected{% endif %}>{{ categoria }}</option>
+        {% endfor %}
+    </select>
+    <label for="precio">Precio en euros</label>
+    <input id="precio" name="precio" type="text" inputmode="decimal" value="{{ valores.get('precio', '') }}" required aria-describedby="ayuda-precio">
+    <p class="ayuda" id="ayuda-precio">Mayor que 0 y hasta 10000 €, con un máximo de dos decimales. Puedes usar coma o punto.</p>
+    <label for="stock">Stock en unidades</label>
+    <input id="stock" name="stock" type="number" min="0" max="10000" step="1" value="{{ valores.get('stock', '') }}" required>
+    <label for="descripcion">Descripción</label>
+    <textarea id="descripcion" name="descripcion" rows="4" required>{{ valores.get('descripcion', '') }}</textarea>
+    <button type="submit">Guardar producto</button>
+</form>
+{% endblock %}
